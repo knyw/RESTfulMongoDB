@@ -1,0 +1,706 @@
+<!-- views/index.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Test API</title>
+        <meta name="author" content="Kenny Wu">
+        <meta name="date" content="November 6, 2019">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/style.css">
+        <script src="/script.js" defer></script>
+    </head>
+    <body>
+        <div class="sideBar">
+            <a href="#signIn">/api/signin</a>
+            <a href="#instructor">/api/instructor</a>
+            <a href="#student">/api/student</a>
+            <a href="#course">/api/course</a>
+            <a href="#resources">/api/list</a>
+            <a href="#views">/api/view</a>
+        </div>
+
+        <main>
+            <h2 id="signIn">Sign In</h2>
+            <h3>/api/signin</h3>
+            <table>
+                <tr>
+                    <td>Description</td>
+                    <td>Sign in authentication</td>
+                </tr>
+                <tr>
+                    <td>URL Structure</td>
+                    <td>https://testsite.com/api/signin</td>
+                </tr>
+                <tr>
+                    <td>Method</td>
+                    <td>GET</td>
+                </tr>
+                <tr>
+                    <td>Parameters</td>
+                    <td>
+                        <pre>
+                            <code>
+{
+    "email": "john@gmail.com",
+    "password": "12345"
+}
+                            </code>
+                        </pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Response</td>
+                    <td>
+                        <pre>
+                            <code>
+HTTP/1.1 200 OK
+                            </code>
+                        </pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Errors</td>
+                    <td>
+                        <p><span class="bold">400</span> Invalid password</p>
+                    </td>
+                </tr>
+            </table>
+
+            <h2 id="instructor">Instructor</h2>
+            <h3>/api/instructor</h3>
+            <table>
+                <tr>
+                    <td>Description</td>
+                    <td>Retrieve, update, or delete information about specific instructor</td>
+                </tr>
+                <tr>
+                    <td>URL Structure</td>
+                    <td>https://testsite.com/api/instructor/5dc7aded825f3d761e63402a</td>
+                </tr>
+                <tr>
+                    <td>Method</td>
+                    <td><a href="./view/instructor/5dc7aded825f3d761e63402a">GET</a>, PUT, DELETE</td>
+                </tr>
+                <tr>
+                    <td>Parameters (PUT)</td>
+                    <td>
+                        <pre>
+                            <code>
+{   
+    "instructor": {
+        "courses": [
+            "INFSCI 2560"
+        ]
+        "_id": ""
+        "email": "updatemail@gamil.com",
+        "firstName": "John",
+        "lastName": "Doe"
+    }
+}
+                            </code>
+                        </pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Query Parameters</td>
+                    <td>
+                        <a href="./api/instructor/?coursecode=INFSCI%202560"><span class="bold">coursecode</span></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Response</td>
+                    <td>
+                        <pre>
+                            <code>
+HTTP/1.1 200 OK
+Content-Type: application/json 
+{   
+    "link": "/api/instructor/1"
+    "message": "",
+    "data": {
+        "courses": [
+            "INFSCI 2560"
+        ]
+        "_id": ""
+        "email": "updatemail@gmail.com",
+        "firstName": "John",
+        "lastName": "Doe"
+        "courses": [
+            ""
+        ]
+    }
+}
+                            </code>
+                        </pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Errors</td>
+                    <td>
+                        <p><span class="bold">400</span> Bad Request</p>
+                    </td>
+                </tr>
+            </table>
+
+            <h3>/api/instructor (POST)</h3>
+            <table>
+                <tr>
+                    <td>Description</td>
+                    <td>Create new instructor</td>
+                </tr>
+                <tr>
+                    <td>URL Structure</td>
+                    <td>https://testsite.com/api/instructor/</td>
+                </tr>
+                <tr>
+                    <td>Method</td>
+                    <td>
+                        <form action="./api/instructor/" method="POST">
+                            <a href="#" onclick="this.parentNode.submit()">POST</a>
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Parameters</td>
+                    <td>
+                        <pre>
+                            <code>
+{
+    "email": "newemail@gamil.com",
+    "firstName": "Jane",
+    "lastName": "Doe"
+}
+                            </code>
+                        </pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Response</td>
+                    <td>
+                        <pre>
+                            <code>
+HTTP/1.1 200 OK
+Content-Type: application/json 
+{   
+    "link": "/api/instructor/2"
+    "message": "",
+    "data": {
+        "email": "newemail@gmail.com",
+        "firstName": "Jane",
+        "lastName": "Doe"
+        "courses": [
+            ""
+        ]
+    }
+}
+                            </code>
+                        </pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Errors</td>
+                    <td>
+                        <p><span class="bold">400</span> Bad Request</p>
+                        <p><span class="bold">401</span> Unauthorized</p>
+                        <p><span class="bold">403</span> Forbidden</p>
+                        <p><span class="bold">404</span> Not Found</p>
+                    </td>
+                </tr>
+            </table>
+
+            <h2 id="student">Student</h2>
+            <h3>/api/student</h3>
+            <table>
+                <tr>
+                    <td>Description</td>
+                    <td>Retrieve, update, or delete information about specific student</td>
+                </tr>
+                <tr>
+                    <td>URL Structure</td>
+                    <td>https://testsite.com/api/student/5dc7af46825f3d761e634031</td>
+                </tr>
+                <tr>
+                    <td>Method</td>
+                    <td><a href="./view/student/5dc7af46825f3d761e634031">GET</a>, PUT, DELETE</td>
+                </tr>
+                <tr>
+                    <td>Parameters (PUT)</td>
+                    <td>
+                        <pre>
+                            <code>
+{
+    "email": "updatestudentemail@gamil.com",
+    "firstName": "Old",
+    "lastName": "Student"
+}
+                            </code>
+                        </pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Query Parameters</td>
+                    <td>
+                        <a href="./api/student/?coursecode=INFSCI%202560"><span class="bold">coursecode</span></a>
+                        <a href="./api/student/?gender=male"><span class="bold">gender</span></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Response</td>
+                    <td>
+                        <pre>
+                            <code>
+HTTP/1.1 200 OK
+Content-Type: application/json 
+{   
+    "link": "/api/student/1"
+    "message": "",
+    "data": {
+        "email": [
+            "updatestudentemail@gmail.com"
+        ],
+        "firstName": "Old",
+        "lastName": "Student",
+        "gender": "female",
+        "courses": [
+            ""
+        ]
+    }
+}
+                            </code>
+                        </pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Errors</td>
+                    <td>
+                        <p><span class="bold">400</span> Bad Request</p>
+                    </td>
+                </tr>
+            </table>
+
+            <h3>/api/student (POST)</h3>
+            <table>
+                <tr>
+                    <td>Description</td>
+                    <td>Create new student</td>
+                </tr>
+                <tr>
+                    <td>URL Structure</td>
+                    <td>https://testsite.com/api/student/</td>
+                </tr>
+                <tr>
+                    <td>Method</td>
+                    <td>POST</td>
+                </tr>
+                <tr>
+                    <td>Parameters</td>
+                    <td>
+                        <pre>
+                            <code>
+{
+    "email": "newstudentemail@gamil.com",
+    "firstName": "New",
+    "lastName": "Student"
+}
+                            </code>
+                        </pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Response</td>
+                    <td>
+                        <pre>
+                            <code>
+HTTP/1.1 200 OK
+Content-Type: application/json 
+{   
+    "link": "/api/student/2"
+    "message": "",
+    "data": {
+        "email": [
+            "newstudentemail@gmail.com"
+        ],
+        "firstName": "New",
+        "lastName": "Student",
+        "gender": "male",
+        "courses": [
+            ""
+        ]
+    }
+}
+                            </code>
+                        </pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Errors</td>
+                    <td>
+                        <p><span class="bold">400</span> Bad Request</p>
+                        <p><span class="bold">401</span> Unauthorized</p>
+                        <p><span class="bold">403</span> Forbidden</p>
+                        <p><span class="bold">404</span> Not Found</p>
+                    </td>
+                </tr>
+            </table>
+
+            <h3>/api/student-collection (POST)</h3>
+            <table>
+                <tr>
+                    <td>Description</td>
+                    <td>Create multiple new students</td>
+                </tr>
+                <tr>
+                    <td>URL Structure</td>
+                    <td>https://testsite.com/api/student-collection/</td>
+                </tr>
+                <tr>
+                    <td>Method</td>
+                    <td>POST</td>
+                </tr>
+                <tr>
+                    <td>Parameters</td>
+                    <td>
+                        <pre>
+                            <code>
+[
+    {
+        "email": "newstudentemail@gamil.com",
+        "firstName": "New",
+        "lastName": "Student"
+    },
+    {
+        "email": "newstudentemail@gamil.com",
+        "firstName": "New",
+        "lastName": "Student"
+    }
+]
+                            </code>
+                        </pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Response</td>
+                    <td>
+                        <pre>
+                            <code>
+HTTP/1.1 200 OK
+Content-Type: application/json 
+{   
+    "link": "/api/student/2"
+    "message": "",
+    "data": [
+        {
+            "email": "newstudentemail@gamil.com",
+            "firstName": "New",
+            "lastName": "Student"
+        },
+        {
+            "email": "newstudentemail@gamil.com",
+            "firstName": "New",
+            "lastName": "Student"
+        }
+    ]
+}
+                            </code>
+                        </pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Errors</td>
+                    <td>
+                        <p><span class="bold">400</span> Bad Request</p>
+                        <p><span class="bold">401</span> Unauthorized</p>
+                        <p><span class="bold">403</span> Forbidden</p>
+                        <p><span class="bold">404</span> Not Found</p>
+                    </td>
+                </tr>
+            </table>
+
+            <h3>/api/student/:studentID/email</h3>
+            <table>
+                <tr>
+                    <td>Description</td>
+                    <td>Retrieve only email about specific student</td>
+                </tr>
+                <tr>
+                    <td>URL Structure</td>
+                    <td>https://testsite.com/api/student/5dc7af1d825f3d761e634030/email</td>
+                </tr>
+                <tr>
+                    <td>Method</td>
+                    <td><a href="./api/student/5dc7af1d825f3d761e634030/email">GET</a></td>
+                </tr>
+                <tr>
+                    <td>Response</td>
+                    <td>
+                        <pre>
+                            <code>
+HTTP/1.1 200 OK
+Content-Type: application/json 
+{
+    "link": "/api/students/4",
+    "message": "",
+    "data": [
+        "dwinchester@pitt.edu",
+        "carryon@comcast.net",
+        "monster@sn.com"
+    ]
+}
+                            </code>
+                        </pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Errors</td>
+                    <td>
+                        <p><span class="bold">400</span> Bad Request</p>
+                    </td>
+                </tr>
+            </table>
+
+            <h2 id="course">Course</h2>
+            <h3>/api/course</h3>
+            <table>
+                <tr>
+                    <td>Description</td>
+                    <td>Retrieve, update, or delete specific course</td>
+                </tr>
+                <tr>
+                    <td>URL Structure</td>
+                    <td>https://testsite.com/api/course/5dc7aff6825f3d761e634032</td>
+                </tr>
+                <tr>
+                    <td>Method</td>
+                    <td><a href="./view/course/5dc7aff6825f3d761e634032">GET</a>, PUT, DELETE</td>
+                </tr>
+                <tr>
+                    <td>Parameters (PUT)</td>
+                    <td>
+                        <pre>
+                            <code>
+{
+    "courseCode": "INFSCI 2560",
+    "courseName": "Web Technology & Standards",
+    "semester": "Fall 2019",
+    "location": "Information Science Building"
+}
+                            </code>
+                        </pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Query Parameters</td>
+                    <td>
+                        <a href="./api/course/?semester=Fall%202019"><span class="bold">semester</span></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Response</td>
+                    <td>
+                        <pre>
+                            <code>
+HTTP/1.1 200 OK
+Content-Type: application/json 
+{   
+    "link": "/api/course/1"
+    "message": "",
+    "data": {
+        "courseCode": "INFSCI 2560",
+        "courseName": "Web Technology & Standards",
+        "semester": "Fall 2019",
+        "location": "Information Science Building"
+    }
+}
+                            </code>
+                        </pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Errors</td>
+                    <td>
+                        <p><span class="bold">400</span> Bad Request</p>
+                    </td>
+                </tr>
+            </table>
+
+            <h3>/api/course (POST)</h3>
+            <table>
+                <tr>
+                    <td>Description</td>
+                    <td>Create new course</td>
+                </tr>
+                <tr>
+                    <td>URL Structure</td>
+                    <td>https://testsite.com/api/course/</td>
+                </tr>
+                <tr>
+                    <td>Method</td>
+                    <td>POST</td>
+                </tr>
+                <tr>
+                    <td>Parameters</td>
+                    <td>
+                        <pre>
+                            <code>
+{
+    "courseCode": "INFSCI 2540",
+    "courseName": "Software Engineering",
+    "semester": "Fall 2019",
+    "location": "Information Science Building"
+}
+                            </code>
+                        </pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Response</td>
+                    <td>
+                        <pre>
+                            <code>
+HTTP/1.1 200 OK
+Content-Type: application/json 
+{   
+    "link": "/api/course/2"
+    "message": "",
+    "data": {
+        "courseCode": "INFSCI 2540"
+        "courseName": "Software Engineering"
+        "semester": "Fall 2019",
+        "location": "Information Science Building"
+    }
+}
+                            </code>
+                        </pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Errors</td>
+                    <td>
+                        <p><span class="bold">400</span> Bad Request</p>
+                        <p><span class="bold">401</span> Unauthorized</p>
+                        <p><span class="bold">403</span> Forbidden</p>
+                        <p><span class="bold">404</span> Not Found</p>
+                    </td>
+                </tr>
+            </table>
+
+            <h2 id="resources">Resources</h2>
+            <h3>/api/list</h3>
+            <table>
+                <tr>
+                    <td>Description</td>
+                    <td>Retrieve all resources available</td>
+                </tr>
+                <tr>
+                    <td>URL Structure</td>
+                    <td>https://testsite.com/api/list</td>
+                </tr>
+                <tr>
+                    <td>Method</td>
+                    <td><a href="./view/list">GET</a></td>
+                </tr>
+                <tr>
+                    <td>Response</td>
+                    <td>
+                        <pre>
+                            <code>
+HTTP/1.1 200 OK
+Content-Type: application/json 
+[
+    "accounts",
+    "courses",
+    "instructors",
+    "students"
+]
+                            </code>
+                        </pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Errors</td>
+                    <td>
+                        <p><span class="bold">400</span> Bad Request</p>
+                        <p><span class="bold">401</span> Unauthorized</p>
+                        <p><span class="bold">403</span> Forbidden</p>
+                        <p><span class="bold">404</span> Not Found</p>
+                    </td>
+                </tr>
+            </table>
+            
+            <h2 id="views">Views</h2>
+            <h3>/view</h3>
+            <table>
+                <tr>
+                    <td>Description</td>
+                    <td>Retrieve EJS view template</td>
+                </tr>
+                <tr>
+                    <td>URL Structure</td>
+                    <td>
+                        <p>https://testsite.com/view/instructor/:instructorID</p>
+                        <p>https://testsite.com/view/student/:studentID</p>
+                        <p>https://testsite.com/view/course/:courseID</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Method</td>
+                    <td><a href="./view/instructor/5dc7ae7c825f3d761e63402d">GET</a></td>
+                </tr>
+                <tr>
+                    <td>Response</td>
+                    <td>EJS template views</td>
+                </tr>
+                <tr>
+                    <td>Errors</td>
+                    <td>
+                        <p><span class="bold">400</span> Bad Request</p>
+                        <p><span class="bold">401</span> Unauthorized</p>
+                        <p><span class="bold">403</span> Forbidden</p>
+                        <p><span class="bold">404</span> Not Found</p>
+                    </td>
+                </tr>
+            </table>
+            <h3>/view/list</h3>
+            <table>
+                <tr>
+                    <td>Description</td>
+                    <td>Retrieve EJS view template listing out resources based on query parameter</td>
+                </tr>
+                <tr>
+                    <td>URL Structure</td>
+                    <td>
+                        <p>https://testsite.com/view/list?resource=students</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Method</td>
+                    <td><a href="./view/list?resource=instructors">GET</a></td>
+                </tr>
+                <tr>
+                    <td>Query Parameters</td>
+                    <td>
+                        <a href="./view/list/?resource=courses"><span class="bold">resource</span></a>
+                        <p>"./view/list/?resource=courses"</p>
+                        <p class="bold">(query parameter would return an EJS view)</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Response</td>
+                    <td>EJS template views</td>
+                </tr>
+                <tr>
+                    <td>Errors</td>
+                    <td>
+                        <p><span class="bold">400</span> Bad Request</p>
+                        <p><span class="bold">401</span> Unauthorized</p>
+                        <p><span class="bold">403</span> Forbidden</p>
+                        <p><span class="bold">404</span> Not Found</p>
+                    </td>
+                </tr>
+            </table>
+        </main>
+    </body>
+</html>

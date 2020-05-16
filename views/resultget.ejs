@@ -1,0 +1,47 @@
+<!-- views/resultget.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Result(GET)</title>
+        <meta name="author" content="Kenny Wu">
+        <meta name="date" content="November 6, 2019">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/style.css">
+        <script src="/script.js" defer></script>
+    </head>
+    <body>
+        <div class="result">
+            <h3>Original Response:</h3>
+            <pre class="center">
+                <code>
+<%= originalResult %>
+                </code> 
+            </pre>
+            <h3>Headers:</h3>
+            <pre class="center">
+                <code>
+<%= head %> <%= status %>
+Content-Type: <%= type %>                   
+                </code>
+            </pre>
+            <h3>Location:</h3>
+            <pre class="center">
+                <code>
+<a href="<%= link %>"><%= link %></a>
+                </code>
+            </pre>
+            <h3>Data:</h3>
+            <table style="margin: auto;">
+                <% Object.keys(data).forEach(function(key) { %>
+                    <tr>
+                        <td><%= key %></td>
+                        <td><%= data[key] %></td>
+                    </tr>
+                <% }); %>
+            </table>
+        </div>    
+    </body>
+</html>

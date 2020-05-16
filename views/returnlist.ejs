@@ -1,0 +1,33 @@
+<!-- views/resultlist.ejs -->
+
+<div style="width: 44.4rem; margin: auto; padding: 1rem; background-color: rgb(237, 237, 237); border: 1px solid rgb(150, 150, 150);">
+    <h2 style="text-align: center;"><%= name %></h2>
+        <% for (var idx=0; idx < data.length; idx++) { %>
+    <table style="display: inline-block; border: 2px solid black; border-collapse: collapse; width: 22rem; height: 20rem; vertical-align: top; margin-bottom: 1rem; background-color: rgb(198, 197, 197);">
+        <tr>
+            <th colspan="2" style="border: 2px solid black; height: 2rem; font-size: 1.3rem; font-weight: bold;"><%= idx + 1 %></th>
+        </tr>
+        <% Object.keys(data[idx]).forEach(function(key) { %>
+            <% if (key != "_id" && key != "__v") {%>
+            <% formattedKey = key.replace(/([A-Z])/g, " $1").trim(); %>
+            <% formattedKey = formattedKey.replace(/^\w/, c => c.toUpperCase()); %>
+            <% if (typeof(data[idx][key]) == "object") { %>
+                <tr>
+                    <td style="border: 1px solid black; width: 6rem; padding-left: 0.5rem; font-weight: bold;"><%= formattedKey %></td>
+                    <td style="border: 1px solid black; padding-left: 0.5rem;">
+                        <% for (var i=0; i < data[idx][key].length; i++) { %>
+                            <p style="margin: 0;"><%= data[idx][key][i] %></p>
+                        <% } %>
+                    </td>
+                </tr>
+            <% } else {%>
+                <tr>
+                    <td style="border: 1px solid black; width: 6rem; padding-left: 0.5rem; font-weight: bold;"><%= formattedKey %></td>
+                    <td style="border: 1px solid black; padding-left: 0.5rem;"><%= data[idx][key] %></td>
+                </tr>                
+            <% } %>
+            <% } %>
+        <% }); %>                    
+    </table>
+        <% } %>
+</div>

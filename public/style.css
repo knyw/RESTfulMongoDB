@@ -1,0 +1,70 @@
+body {
+    font-family: "Benton Sans", "Helvetica Neue", helvetica, arial, sans-serif;
+    margin: 0 0 4rem 0;
+    box-sizing: border-box;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+.sideBar {
+    position: fixed;
+    padding: 1rem;
+    width: 12rem;
+    top: 3rem;
+    left: 3rem;
+    background: lightgray;
+}
+.sideBar > a {
+    display: block;
+    text-decoration: none;
+    font-size: 1.4rem;
+    padding: 0.5rem;
+    color: blue;
+}
+.sideBar > a:hover {
+    color: rgb(124, 124, 255);
+}
+main {
+    margin: 0 0 0 17rem;
+}
+h2 {
+    margin: 0;
+    padding: 3rem 0 0 0;
+}
+table {
+    background-color: rgb(198, 197, 197);
+    border: 1px solid rgb(150, 150, 150);
+}
+tr > td:first-child {
+    padding: 0.5rem;
+    color: rgb(108, 108, 108);
+    width: 8rem;
+    text-align: right;
+}
+tr > td:last-child {
+    padding: 0.5rem 0.5rem 0.5rem 1rem;
+}
+pre code {
+    display: block;
+    width: 30rem;
+    background-color: rgb(237, 237, 237);
+    border: 1px solid rgb(150, 150, 150);
+    padding: 1rem 3rem;
+}
+.bold {
+    font-weight: bold;
+}
+.result {
+    width: 50rem;
+    background-color: rgb(198, 197, 197);
+    border: 1px solid rgb(150, 150, 150);
+    margin: 2rem auto;
+    padding: 1rem;
+
+}
+.result > h3 {
+    margin-left: 8rem;
+}
+.center {
+    margin: 0 8rem;
+}
