@@ -2,6 +2,7 @@
  * Created on November 6, 2019
  * @author Kenny Wu
  */
+const dotenv = require("dotenv");
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
@@ -9,8 +10,10 @@ const bodyParser = require("body-parser")
 const fs = require('fs');
 const path = require("path");
 const port = 10030;
+dotenv.config();
+
 //app.get("/", (req, res) => res.send("Hello World!"))
-/*
+
 const mongoDB = ("mongodb+srv://"+
                  process.env.USERNAME+
                  ":"
@@ -19,8 +22,7 @@ const mongoDB = ("mongodb+srv://"+
                  +process.env.HOST+
                  "/"
                  +process.env.DATABASE);
-*/
-const mongoDB = ("mongodb+srv://databaseUser:sirzo7-myqwir-biCdix@kenny-infsci2560-vqcwl.mongodb.net/Project_3");
+
 mongoose.connect(mongoDB, {useNewUrlParser: true, retryWrites: true, useUnifiedTopology: true});
 mongoose.connection.on('connected', function () {
     console.log('Mongoose connected to ' + "Project_3");
