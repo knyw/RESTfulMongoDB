@@ -44,7 +44,7 @@ mongoose.connection.on('disconnected', function () {
 
 
 // use stylesheet in /public folder
-app.use(express.static(__dirname + "public"));
+app.use(express.static(__dirname + "/public"));
 
 // set views to /views folder
 app.set("views", path.resolve(__dirname, "views"));
